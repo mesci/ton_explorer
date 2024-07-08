@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Home - TON SCAN v.01</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+</head>
+<body>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <p class="title">TON SCAN v0.1</p>
+
+    <table>
+      <tbody>
+        <div class="form-edit">
+        <form action="/search" method="post">
+      <input type="text" id="query" placeholder="Enter TON Wallet Address" name="query" required>
+      <button id="uniqueButton" class="buttonStyle" type="submit">Search</button>
+    </form>
+    </div>
+    {% if ton_price_data.error %}
+        <p>{{ ton_price_data.error }}</p>
+    {% else %}
+        <tr>
+          <td><strong>TON Price</strong></td>
+          <td>${{ '{:,.6f}'.format(ton_price_data.price) }}</td>
+        </tr>
+        <tr>
+          <td><strong>TON Market Cap</strong></td>
+          <td>${{ '{:,.2f}'.format(ton_price_data.market_cap) }}</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+      <tr>
+        <p>Coded by <strong><a href="https://mesci.dev/" target="_blank">Yusuf Mescioğlu</a></strong></p>
+    </tr>
+  </div>
+</body>
+</html>

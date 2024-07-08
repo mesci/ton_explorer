@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <p class="title">TON SCAN v0.1</p>
+    {% if data.error %}
+         <table>
+    <tbody>
+      <tr>
+        <td><strong><a href="/">Back <</a></strong></td>
+        <td>
+          <p class="status status-pending">Data not found, please enter valid address.</p>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+    {% else %}
+  <table>
+    <tbody>
+
+      <tr>
+        <td><strong>Address</strong></td>
+<td>{{ data.address }}</td>
+      </tr>
+      <tr>
+        <td><strong>Balance</strong></td>
+        <td>{{ '{:,.6f}'.format(data.balance) }} TON ({{ '{:,.2f}'.format(data.balance * ton_price_data.price) }} USD)</td>
+      </tr>
+      <tr>
+        <td><strong>Status</strong></td>
+          <td><p class="{{ 'status status-paid' if data.state == 'active' else 'status status-unpaid' }}">{{ data.state }}</p></td>
+      </tr>
+    <tr>
+        <p>Coded by <strong><a href="https://mesci.dev/" target="_blank">Yusuf Mescioğlu</a></strong> | <strong><a href="/">Search Again</a></strong></p>
+    </tr>
+
+    </tbody>
+  </table>
+    {% endif %}
+</body>
+</html>
